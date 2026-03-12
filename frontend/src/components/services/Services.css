@@ -98,3 +98,13 @@
     display: flex;
     justify-content: flex-end;
 }
+
+@media (max-width: 768px) {
+    .services-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .category-filters {
+        padding-bottom: 0.5rem;
+    }
+}

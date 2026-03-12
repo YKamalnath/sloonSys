@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { NavLink, Outlet, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import './AdminLayout.css';
@@ -6,6 +6,7 @@ import './AdminLayout.css';
 const AdminLayout: React.FC = () => {
     const { user, logout } = useAuth();
     const navigate = useNavigate();
+    const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
     const handleLogout = () => {
         if (logout) {
@@ -27,8 +28,16 @@ const AdminLayout: React.FC = () => {
 
     return (
         <div className="admin-layout">
+            {/* Mobile Overlay */}
+            {isMobileMenuOpen && (
+                <div
+                    className="mobile-overlay animate-fade-in"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                ></div>
+            )}
+
             {/* Sidebar */}
-            <aside className="sidebar glass-panel">
+            <aside className={`sidebar glass-panel ${isMobileMenuOpen ? 'open' : ''}`}>
                 <div className="sidebar-header">
                     <h2>Sloon<span className="text-primary">Sys</span></h2>
                 </div>
@@ -41,6 +50,7 @@ const AdminLayout: React.FC = () => {
                                     to={item.path}
                                     end={item.path === '/dashboard'}
                                     className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}
+                                    onClick={() => setIsMobileMenuOpen(false)}
                                 >
                                     <span className="nav-icon">{item.icon}</span>
                                     <span className="nav-label">{item.label}</span>
@@ -69,6 +79,13 @@ const AdminLayout: React.FC = () => {
             {/* Main Content Area */}
             <main className="main-content">
                 <header className="top-header glass-panel">
+                    <button
+                        className="mobile-menu-btn icon-btn"
+                        onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                        aria-label="Toggle menu"
+                    >
+                        <span>☰</span>
+                    </button>
                     <div className="header-search">
                         <span className="search-icon">🔍</span>
                         <input type="text" placeholder="Search anything..." className="search-input" />

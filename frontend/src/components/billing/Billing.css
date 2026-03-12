@@ -304,3 +304,52 @@
         height: auto;
     }
 }
+
+@media (max-width: 768px) {
+
+    .invoice-section,
+    .payment-section {
+        padding: 1rem;
+    }
+
+    .items-header {
+        display: none;
+    }
+
+    .invoice-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        position: relative;
+        padding-top: 1.5rem;
+    }
+
+    .invoice-row>div:nth-child(1) {
+        width: 100%;
+        font-weight: 600;
+    }
+
+    .invoice-row>div:nth-child(2) {
+        width: 30%;
+    }
+
+    .invoice-row>div:nth-child(3) {
+        width: 30%;
+    }
+
+    .invoice-row>div:nth-child(4) {
+        width: 30%;
+        text-align: right;
+    }
+
+    .invoice-row>div:nth-child(5) {
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: auto;
+    }
+
+    .method-grid {
+        grid-template-columns: 1fr;
+    }
+}
