@@ -5,37 +5,16 @@ import Navbar from './components/Navbar'
 import Login from './components/auth/Login'
 import Register from './components/auth/Register'
 import Home from './components/Home'
+import AdminLayout from './components/layout/AdminLayout'
+import Dashboard from './components/dashboard/Dashboard'
+import CustomersView from './components/customers/CustomersView'
+import AppointmentsView from './components/appointments/AppointmentsView'
+import StaffView from './components/staff/StaffView'
+import ServicesView from './components/services/ServicesView'
+import BillingView from './components/billing/BillingView'
+import ProductsView from './components/products/ProductsView'
+import ReportsView from './components/reports/ReportsView'
 import './App.css'
-
-function Dashboard() {
-  const [health, setHealth] = useState<string>('Checking backend health...')
-
-  useEffect(() => {
-    fetch('http://localhost:5000/api/health')
-      .then((res) => res.json())
-      .then((data) => setHealth(data.message))
-      .catch(() => setHealth('Failed to connect to backend.'))
-  }, [])
-
-  return (
-    <div className="app-container">
-      <header className="hero-section">
-        <h1 className="title">Sloon System Dashboard</h1>
-        <p className="subtitle">Your details and tools are ready.</p>
-      </header>
-
-      <main className="content">
-        <div className="status-card">
-          <h2>System Status</h2>
-          <div className="health-check">
-            <span className="status-indicator"></span>
-            <p>{health}</p>
-          </div>
-        </div>
-      </main>
-    </div>
-  )
-}
 
 function App() {
   const { user, loading } = useAuth();
@@ -46,26 +25,36 @@ function App() {
 
   return (
     <>
-      <Navbar />
+      {/* We only show the Navbar on the top level / public routes, not inside dashboard */}
       <Routes>
-        
-         <Route path="/" element={<Home />} />
+        <Route path="/" element={<><Navbar /><Home /></>} />
 
-        
-        <Route
-          path="/dashboard"
-          element={user ? <Dashboard /> : <Navigate to="/login" replace />}
-        />
-
-       
         <Route
           path="/login"
-          element={!user ? <Login /> : <Navigate to="/dashboard" replace />}
+          element={!user ? <><Navbar /><Login /></> : <Navigate to="/dashboard" replace />}
         />
         <Route
           path="/register"
-          element={!user ? <Register /> : <Navigate to="/dashboard" replace />}
+          element={!user ? <><Navbar /><Register /></> : <Navigate to="/dashboard" replace />}
         />
+
+        {/* Protected Dashboard Routes nested under AdminLayout */}
+        <Route
+          path="/dashboard"
+          element={user ? <AdminLayout /> : <Navigate to="/login" replace />}
+        >
+          {/* Default dashboard view */}
+          <Route index element={<Dashboard />} />
+
+          {/* Module placeholders */}
+          <Route path="customers" element={<CustomersView />} />
+          <Route path="appointments" element={<AppointmentsView />} />
+          <Route path="staff" element={<StaffView />} />
+          <Route path="services" element={<ServicesView />} />
+          <Route path="billing" element={<BillingView />} />
+          <Route path="products" element={<ProductsView />} />
+          <Route path="reports" element={<ReportsView />} />
+        </Route>
       </Routes>
     </>
   )

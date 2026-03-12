@@ -1,0 +1,227 @@
+/* Reports Module Styling */
+
+.range-selector {
+    display: flex;
+    background: var(--bg-card);
+    padding: 0.35rem;
+    border-radius: var(--radius-full);
+    border: 1px solid var(--border-color);
+    gap: 0.25rem;
+}
+
+.range-btn {
+    padding: 0.5rem 1rem;
+    border-radius: var(--radius-full);
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--text-muted);
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    transition: all var(--transition-fast);
+}
+
+.range-btn:hover {
+    color: var(--text-main);
+}
+
+.range-btn.active {
+    background: var(--bg-main);
+    color: var(--primary-color);
+    box-shadow: var(--shadow-sm);
+}
+
+.reports-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    padding-bottom: 2rem;
+}
+
+.report-card {
+    padding: 1.5rem;
+    border-radius: var(--radius-lg);
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+}
+
+.span-2 {
+    grid-column: span 3;
+    /* For better responsiveness, span full width initially */
+}
+
+@media (min-width: 1200px) {
+    .span-2 {
+        grid-column: span 2;
+    }
+}
+
+.metric-card {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.primary-bg {
+    background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+    color: white;
+    border: none;
+}
+
+.primary-bg .metric-header h3,
+.primary-bg .metric-value,
+.primary-bg .label,
+.primary-bg .value {
+    color: white;
+}
+
+.metric-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.metric-header h3 {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-muted);
+    margin: 0;
+}
+
+.trend {
+    font-size: 0.85rem;
+    font-weight: 600;
+    padding: 0.2rem 0.6rem;
+    border-radius: var(--radius-full);
+}
+
+.trend.positive {
+    background: rgba(16, 185, 129, 0.1);
+    color: var(--success-color);
+}
+
+.primary-bg .trend.positive {
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+}
+
+.metric-value {
+    font-size: 2.25rem;
+    font-weight: 700;
+    color: var(--text-main);
+    margin: 0.5rem 0;
+}
+
+.metric-subtitle {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+}
+
+.metric-split {
+    display: flex;
+    justify-content: space-between;
+    margin-top: auto;
+    padding-top: 1rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.metric-split div {
+    display: flex;
+    flex-direction: column;
+}
+
+.metric-split .label {
+    font-size: 0.8rem;
+    opacity: 0.9;
+}
+
+.metric-split .value {
+    font-weight: 600;
+    font-size: 1.1rem;
+}
+
+.card-title {
+    font-size: 1.25rem;
+    margin-bottom: 1.5rem;
+    color: var(--text-main);
+}
+
+/* Simple Bar Chart */
+.bar-chart {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+}
+
+.chart-row {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.chart-label {
+    width: 140px;
+    display: flex;
+    flex-direction: column;
+}
+
+.chart-name {
+    font-weight: 500;
+    font-size: 0.95rem;
+    color: var(--text-main);
+}
+
+.chart-count {
+    font-size: 0.8rem;
+}
+
+.bar-container {
+    flex: 1;
+    height: 12px;
+    background: var(--bg-main);
+    border-radius: var(--radius-full);
+    overflow: hidden;
+}
+
+.bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+    border-radius: var(--radius-full);
+    transition: width 1s ease-out;
+}
+
+.chart-value {
+    width: 80px;
+    text-align: right;
+    font-weight: 600;
+    font-size: 0.95rem;
+}
+
+.rating-pill {
+    background: rgba(245, 158, 11, 0.1);
+    color: var(--warning-color);
+    padding: 0.25rem 0.6rem;
+    border-radius: var(--radius-full);
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+.revenue-cell {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+}
+
+.mini-bar {
+    width: 100%;
+    height: 4px;
+    background: var(--bg-main);
+    border-radius: var(--radius-full);
+    overflow: hidden;
+}
+
+.mini-bar-fill {
+    height: 100%;
+    background: var(--success-color);
+    border-radius: var(--radius-full);
+}
